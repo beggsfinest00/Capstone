@@ -18,8 +18,35 @@ public class PathingAI : MonoBehaviour
 
            if (Physics.Raycast(ray, out hit))
            {
-                agent.SetDestination(hit.point);
-           }
+                //may not walk on
+                if(hit.collider.CompareTag("Red A") && transform.tag != "Red Man")
+                    agent.SetDestination(hit.point);
+
+                if (hit.collider.CompareTag("Green D") && transform.tag != "Red Man")
+                    agent.SetDestination(hit.point);
+
+                if (hit.collider.CompareTag("Yellow D") && transform.tag != "Red Man")
+                    agent.SetDestination(hit.point);
+
+                if (hit.collider.CompareTag("Blue D") && transform.tag != "Red Man")
+                    agent.SetDestination(hit.point);
+
+                //may walk on
+                if (hit.collider.CompareTag("Red D") && transform.tag == "Red Man")
+                    agent.SetDestination(hit.point);
+
+                if (hit.collider.CompareTag("Green A") && transform.tag == "Red Man")
+                    agent.SetDestination(hit.point);
+
+                if (hit.collider.CompareTag("Yellow A") && transform.tag == "Red Man")
+                    agent.SetDestination(hit.point);
+
+                if (hit.collider.CompareTag("Blue A") && transform.tag == "Red Man")
+                    agent.SetDestination(hit.point);
+
+                if (hit.collider.CompareTag("Center") && transform.tag == "Red Man")
+                    agent.SetDestination(hit.point);
+            }
         }
     }
 }

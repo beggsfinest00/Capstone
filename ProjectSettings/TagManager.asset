@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Red D
+  - Red A
+  - Red Man
+  - Center
+  - Green A
+  - Green D
+  - Green Man
+  - Yellow A
+  - Yellow D
+  - Yellow Man
+  - Blue A
+  - Blue D
+  - Blue Man
   layers:
   - Default
   - TransparentFX
