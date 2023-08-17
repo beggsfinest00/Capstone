@@ -9,8 +9,9 @@ public class RedTentSpawn : MonoBehaviour
     [System.Serializable]
     public class Troop
     {
+        public GameObject troopPrefab;
         public string name;
-        public Transform minion;
+        public Transform unit;
         public int count;
         public float rate;
     }
@@ -18,29 +19,30 @@ public class RedTentSpawn : MonoBehaviour
     public Troop[] troops;
     private int nextTroop = 0;
 
-    public float timeBetweengroups = 10f;
-    public float groupCountdown;
+    public float timeBetweenGroups = 10f;
+    public float groupCountDown = 0f;
 
     private SpawnState state = SpawnState.Counting;
 
     void Start()
     {
-        waveCountdown - timeBetween;
+        //groupCountDown - timeBetweenGroups;
+        groupCountDown = timeBetweenGroups;
     }
 
     void Update() 
     {
-        if (groupCountdown <= 0)
+        if (groupCountDown <= 0 && Input.GetMouseButtonDown(0))
         {
 
             if (state != SpawnState.Spawning)
             {
-                StartCoroutine( SpawnGroup ( groups[nextGroup] ) );
+                StartCoroutine( SpawnGroup ( troops[nextTroop] ) );
             }
         }
         else
         {
-            groupCountdown -= Time.deltaTime;
+            groupCountDown -= Time.deltaTime;
         }
     }
 
@@ -56,11 +58,13 @@ public class RedTentSpawn : MonoBehaviour
 
         state = SpawnState.Waiting;
 
+        groupCountDown = timeBetweenGroups;
+
         yield break;
     }
 
     void SpawnUnit ( Transform _unit )
     {
-        Debug.log("spawning Unit: " + _unit.name);
+        Debug.Log("spawning Unit: " + _unit.name);
     }
 }
