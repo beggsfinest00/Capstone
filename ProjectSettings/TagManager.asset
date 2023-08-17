@@ -17,6 +17,11 @@ TagManager:
   - Blue A
   - Blue D
   - Blue Man
+  - CinemachineTarget
+  - Red Tent
+  - Green Tent
+  - Blue Tent
+  - Yellow Tent
   layers:
   - Default
   - TransparentFX

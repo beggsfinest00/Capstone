@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class PathingAI : MonoBehaviour
+public class RedPathingAI: MonoBehaviour
 {
     public Camera cam;
 
