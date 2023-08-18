@@ -1,6 +1,8 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RedTentSpawn : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class RedTentSpawn : MonoBehaviour
     public Troop[] troops;
     private int nextTroop = 0;
 
+   
     public float timeBetweenGroups = 10f;
     public float groupCountDown = 0f;
 
@@ -26,24 +29,31 @@ public class RedTentSpawn : MonoBehaviour
 
     void Start()
     {
-        //groupCountDown - timeBetweenGroups;
         groupCountDown = timeBetweenGroups;
     }
 
     void Update() 
     {
-        if (groupCountDown <= 0 && Input.GetMouseButtonDown(0))
+        if (groupCountDown >= 0)
+        {
+            groupCountDown -= Time.deltaTime;
+        }
+
+        
+     
+    }
+
+    public void SpawnTroop(int numTroop)
+    {
+        if (groupCountDown <= 0)
         {
 
             if (state != SpawnState.Spawning)
             {
-                StartCoroutine( SpawnGroup ( troops[nextTroop] ) );
+                StartCoroutine(SpawnGroup(troops[numTroop]));
             }
         }
-        else
-        {
-            groupCountDown -= Time.deltaTime;
-        }
+        
     }
 
     IEnumerator SpawnGroup( Troop _group )
