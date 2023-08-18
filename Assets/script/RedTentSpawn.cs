@@ -32,14 +32,27 @@ public class RedTentSpawn : MonoBehaviour
 
     void Update() 
     {
-        if (groupCountDown <= 0 && Input.GetMouseButtonDown(0))
+        if (groupCountDown >= 0)
         {
 
             if (state != SpawnState.Spawning)
             {
-                StartCoroutine( SpawnGroup ( troops[nextTroop] ) );
+                StartCoroutine( SpawnGroup ( troops[ knightTroop ] ));
             }
         }
+        else
+        {
+            groupCountDown -= Time.deltaTime;
+        }
+    }
+
+    public void numTroop()
+    {
+        if (state != SpawnState.Spawning)
+        {
+            StartCoroutine( SpawnGroup (troops[ knightTroop ] ) );
+        }
+    }
         else
         {
             groupCountDown -= Time.deltaTime;
