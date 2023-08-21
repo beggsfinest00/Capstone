@@ -1,6 +1,8 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RedTentSpawn : MonoBehaviour
 {
@@ -19,6 +21,7 @@ public class RedTentSpawn : MonoBehaviour
     public Troop[] troops;
     private int nextTroop = 0;
 
+
     public float timeBetweenGroups = 10f;
     public float groupCountDown = 0f;
 
@@ -30,43 +33,38 @@ public class RedTentSpawn : MonoBehaviour
         groupCountDown = timeBetweenGroups;
     }
 
-    void Update() 
+    void Update()
     {
+            
         if (groupCountDown >= 0)
+            {
+                groupCountDown -= Time.deltaTime;
+            }
+
+
+
+    }
+
+    public void SpawnTroop(int numTroop)
+    {
+        if (groupCountDown <= 0)
         {
 
             if (state != SpawnState.Spawning)
             {
-                StartCoroutine( SpawnGroup ( troops[ knightTroop ] ));
+                StartCoroutine(SpawnGroup(troops[numTroop]));
             }
         }
-        else
-        {
-            groupCountDown -= Time.deltaTime;
-        }
     }
 
-    public void numTroop()
-    {
-        if (state != SpawnState.Spawning)
-        {
-            StartCoroutine( SpawnGroup (troops[ knightTroop ] ) );
-        }
-    }
-        else
-        {
-            groupCountDown -= Time.deltaTime;
-        }
-    }
-
-    IEnumerator SpawnGroup( Troop _group )
+    IEnumerator SpawnGroup(Troop _group)
     {
         state = SpawnState.Spawning;
 
         for (int i = 0; i < _group.count; i++)
         {
-            SpawnUnit (_group.unit);
-            yield return new WaitForSeconds( 1f/_group.rate );
+            SpawnUnit(_group.unit);
+            yield return new WaitForSeconds(1f / _group.rate);
         }
 
         state = SpawnState.Waiting;
@@ -76,7 +74,7 @@ public class RedTentSpawn : MonoBehaviour
         yield break;
     }
 
-    void SpawnUnit ( Transform _unit )
+    void SpawnUnit(Transform _unit)
     {
         Debug.Log("spawning Unit: " + _unit.name);
     }
