@@ -84,19 +84,20 @@ public class RedPathingAI: MonoBehaviour
             }
         }
 
-        if (moving && transform.position == destination)
+        if (moving && transform.position.x == destination.x && transform.position.z == destination.z)
         {
             moving = false;
         }
 
         if (moving)
         {
-            anim.SetBool("Moving", true);
-            anim.SetFloat("Velocity", 0.5f);
+            //anim.SetBool("Moving", true);
+            anim.SetFloat("Velocity", 1f);
         }
         else
         {
-            anim.SetBool("Moving", false);
+            //anim.SetBool("Moving", false);
+            anim.SetFloat("Velocity", 0f);
         }
     }
 }

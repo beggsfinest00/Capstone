@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class RedTentSpawn : MonoBehaviour
 {
+    public Transform spawnLocation;
     public enum SpawnState { Spawning, Waiting, Counting };
 
     [System.Serializable]
@@ -63,7 +64,7 @@ public class RedTentSpawn : MonoBehaviour
 
         for (int i = 0; i < _group.count; i++)
         {
-            SpawnUnit(_group.unit);
+            SpawnUnit(_group.troopPrefab);
             yield return new WaitForSeconds(1f / _group.rate);
         }
 
@@ -74,8 +75,9 @@ public class RedTentSpawn : MonoBehaviour
         yield break;
     }
 
-    void SpawnUnit(Transform _unit)
+    void SpawnUnit(GameObject _troop)
     {
-        Debug.Log("spawning Unit: " + _unit.name);
+        Debug.Log("spawning Unit: " + _troop.name);
+        Instantiate(_troop, spawnLocation.position, spawnLocation.rotation);
     }
 }
