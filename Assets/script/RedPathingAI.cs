@@ -15,6 +15,10 @@ public class RedPathingAI: MonoBehaviour
 
     bool moving;
 
+    public GameObject[] knights;
+
+    public Transform[] spots;
+
     private void Start()
     {
         spawnLoc = transform.position;
@@ -23,6 +27,11 @@ public class RedPathingAI: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        for (int i = 0; i < knights.Length; i++)
+        {
+            knights[i].GetComponent<NavMeshAgent>().SetDestination(spots[i].position);
+        }
+
         if (Input.GetMouseButtonDown(0)) 
         {
            Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -92,12 +101,12 @@ public class RedPathingAI: MonoBehaviour
         if (moving)
         {
             //anim.SetBool("Moving", true);
-            anim.SetFloat("Velocity", 1f);
+            anim?.SetFloat("Velocity", 1f);
         }
         else
         {
             //anim.SetBool("Moving", false);
-            anim.SetFloat("Velocity", 0f);
+            anim?.SetFloat("Velocity", 0f);
         }
     }
 }
